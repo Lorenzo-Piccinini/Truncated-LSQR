@@ -9,7 +9,7 @@ pb=4;
 n = 30000
 for m=26000:200:26000,
 m
-  TCG_vs_STCG,
+  TestLSQR,
 %pause
 
 end

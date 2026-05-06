@@ -1,11 +1,10 @@
 # REFERENCES
-[1] C. C. Paige and M. A. Saunders, LSQR: An algorithm for sparse linear equations and sparse
-least squares, ACM Transactions on Mathematical Software (TOMS), 8 (1982), pp. 43–71.
+[1] L. Piccinini, and V. Simoncini. Truncated LSQR for matrix least squares problems, 
+Computational Optimization and Applications 91 (2), 905-932.
+DOI: https://doi.org/10.1007/s10589-024-00629-w
 
-[2] Valeria Simoncini and Lorenzo Piccinini. TRUNCATED LSQR FOR
-MATRIX LEAST SQUARES PROBLEMS AND APPLICATION TO
-DICTIONARY LEARNING *. working paper or preprint, February
-2024. https://hal.science/hal-04437719/
+[2] C. C. Paige and M. A. Saunders, LSQR: An algorithm for sparse linear equations and sparse
+least squares, ACM Transactions on Mathematical Software (TOMS), 8 (1982), pp. 43–71.
 
 
 # LSQR
@@ -16,4 +15,4 @@ In our work we present a matrix-oriented version of the algorithm that works wit
 a cheaper step that otherwise would have been memory and cost requiring.
 
 
-In order to run the test, rememeber to download first the dataset MNIST. 
+In order to run the test, download first the dataset MNIST. 

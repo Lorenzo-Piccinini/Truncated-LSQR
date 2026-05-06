@@ -163,6 +163,22 @@ tic;
 [ZZ5,ZZ6,r_res6,a_res6,rks6,DD6] = TRUNC_LSQR_ADAPTIVE(H1,H2',rhs1,rhs2,I1',I2,Params);
 t_lsqrAd = toc;
 
+
+fprintf('Truncated Multiterm LSQR: \n')
+its_max = imax;
+Params.r = 10;
+Params.tol = tol;
+Params.tol_tr = tol_tr;
+Params.imax = imax;
+A{1,1} = H1; A{1, 2} = I1;
+A{2,1} = I2; A{2,2} = H2;
+C{1} = rhs1; C{2} = rhs2;
+tic;
+[X_mitli, r_res_multi] = TRUNC_LSQR_MULTITERM(A, C, Params);
+t_multi = toc;
+
+
+
 R1=[rhs1, -H1*X1, -I2*X1]; R2=[rhs2, I1*X2, H2*X2];
 trueres_TCG = sqrt(trace( (R2'*R2)*(R1'*R1) ))/(norm(rhs1)*norm(rhs2))
 
@@ -172,7 +188,9 @@ trueres_lsqr = sqrt(trace( (R2'*R2)*(R1'*R1) ))/(norm(rhs1)*norm(rhs2))
 R1=[rhs1, -H1*ZZ5, -I2*ZZ5]; R2=[rhs2, I1*ZZ6, H2*ZZ6];
 trueres_lsqrAdpt = sqrt(trace( (R2'*R2)*(R1'*R1) ))/(norm(rhs1)*norm(rhs2))
 
-fprintf('Time TCG: %e, Time TLSQR: %e, Time Adaptive TLSQR: %e\n', t_tcg,  t_tlsqr,  t_lsqrAd)
+
+
+fprintf('Time TCG: %e, Time TLSQR: %e, Time Adaptive TLSQR: %e, Time Multi TLSQR: %e\n', t_tcg,  t_tlsqr,  t_lsqrAd, t_multi)
 
 
 
@@ -181,9 +199,10 @@ semilogy(0:length(r_res1)-1,r_res1,'bo-','linewidth',4)
 hold on
 semilogy(0:length(r_res4)-1,r_res4,'md-','linewidth',4)
 semilogy(0:length(r_res6)-1,r_res6,'g+-','linewidth',4)
+semilogy(0:length(r_res_multi)-1,r_res_multi,'k+-','linewidth',4)
 hold off
 title('Relative normal eqn Residuals')
-legend({'TCG','TLSQR','Adaptive LSQR'})
+legend({'TCG','TLSQR','Adaptive LSQR', 'LSQR Multiterm'})
 xlabel('Iterations')
 ylabel('Norm of Relative normal eqn Residual')
 hold off

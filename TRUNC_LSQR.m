@@ -11,9 +11,6 @@ function[X_1,X_2,r_res,estimated_res,rks,DD] = TRUNC_LSQR(A,B,C1,C2,F,E,Params)
 % but it can be
 % generalized also for other version of the Sylvester equation.
 %
-% See the preprint by Valeria Simoncini, Lorenzo Piccinini 
-% https://hal.science/hal-04437719
-%
 % INPUT: 
 % - A,B,F,E: coefficient matrices.
 % - C1,C2: low rank rhs.
@@ -28,6 +25,13 @@ function[X_1,X_2,r_res,estimated_res,rks,DD] = TRUNC_LSQR(A,B,C1,C2,F,E,Params)
 % - estimated_res: vector of the estimates of the realtive residual at each iteration.
 % - rks: vector of ranks of the approximated solution ar each iteration.
 % - DD: array containing all the direction matrices D^(i).
+%
+% If you use this code please cite the following paper:
+% L. Piccinini, and V. Simoncini. Truncated LSQR for matrix least squares problems, 
+% Computational Optimization and Applications 91 (2), 905-932.
+% DOI: https://doi.org/10.1007/s10589-024-00629-w
+%
+% If you note any bug or you have any suggestion please contact the authors.
 
 
 % Computing norm of the operator \cc{A} equivalent to L (needed for
@@ -220,7 +224,7 @@ end
 % sigmatot
 
 X_1 = QX_1*diag(sqrt(RX)); X_2 = QX_2*diag(sqrt(RX));
-disp([i, Params.imax, Params.tol, res_2/res0_2, res/res0])
+disp([i, Params.imax, Params.tol, res_2/res0_2, res/res0, truenormres/res0])
 
 % Uncomment to see the plot about the loss of orthogonality
 %{
@@ -248,7 +252,6 @@ hold off
 xlabel('number of iterations')
 ylabel('magnitude of dropped sing.values')
 %}
-
 end
 
 function[Y1,Y2] = L(A,B,D,E,QX1,QX2,RX)
